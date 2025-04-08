@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            background-color: #8f5cd2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .display {
+            width: center;
+            height: 50px;
+            background-color: #222;
+
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 35px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background-color: #f1f1f1;
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ddd;
+        }
+        .button:active {
+            background-color: #bbb;
+        }
+        
+        .equal {
+            background-color:white;
+            border-radius: 10px;
+            color :red;
+            font-size: 30px;
+        } 
+        .author {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }   
+        .name {
+            color: white;
+            font-size: medium;
+            font-style: italic;
+            background-color: #222;
+
+         }
+
+    </style>
+</head>
+
+<body>
+    
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="deleteLast('X')">X</button>
+        <button class="button" onclick="appendNumber('/')">/</button>
+        <button class="button" onclick="appendNumber('*')">*</button>
+
+        <button class="button" onclick="appendNumber('7')">7</button>
+        <button class="button" onclick="appendNumber('8')">8</button>
+        <button class="button" onclick="appendNumber('9')">9</button>
+        <button class="button" onclick="appendNumber('-')">-</button>
+
+        <button class="button" onclick="appendNumber('4')">4</button>
+        <button class="button" onclick="appendNumber('5')">5</button>
+        <button class="button" onclick="appendNumber('6')">6</button>
+        <button class="button" onclick="appendNumber('+')">+</button>
+
+        <button class="button" onclick="appendNumber('1')">1</button>
+        <button class="button" onclick="appendNumber('2')">2</button>
+        <button class="button" onclick="appendNumber('3')">3</button>
+        <button class="equal" onclick="calculateResult()">=</button>
+
+        <button class="button" onclick="appendNumber('0')">0</button>
+        <button class="button" onclick="appendNumber('.')">.</button>
+    </div>
+
+
+    <div class ="author">
+        <button class="name">Made by Meenaz </button>
+    </div>
+</div>    
+
+
+<script>
+    let currentInput = '0';
+
+    function updateDisplay() {
+        document.getElementById('display').innerText = currentInput;
+    }
+
+    function clearDisplay() {
+        currentInput = '0';
+        updateDisplay();
+    }
+
+    function deleteLast() {
+        if (currentInput.length === 1) {
+            currentInput = '0';
+        } else {
+            currentInput = currentInput.slice(0, -1);
+        }
+        updateDisplay();
+    }
+
+    function appendNumber(number) {
+        if (currentInput === '0') {
+            currentInput = number;
+        } else {
+            currentInput += number;
+        }
+        updateDisplay();
+    }
+
+    function calculateResult() {
+        try {
+            currentInput = eval(currentInput).toString();
+        } catch (error) {
+            currentInput = 'Error';
+        }
+        updateDisplay();
+    }
+</script>
+
+</body>
+</html>
